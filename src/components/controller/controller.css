@@ -1,0 +1,41 @@
+#controller {
+  border: 1px solid rgba(255, 255, 255, 0.43);
+  border-radius: 1rem;
+  position: fixed;
+  right: 1rem;
+  top: 1rem;
+  background-color: rgba(255, 255, 255, 0.09);
+  color: rgba(255, 255, 255, 0.9);
+  padding: 2rem 1rem;
+  justify-content: center;
+  justify-items: center;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  width: 300px;
+  backdrop-filter: blur(0.5rem);
+  gap: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.controller-item {
+  position: relative;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.09);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  border: 3px solid rgba(0, 0, 0, 0.5);
+}
+
+.controller-item:hover {
+  filter: brightness(1.1);
+  cursor: pointer;
+}
+
+#controller-main-menu {
+  background-color: var(--primary);
+  justify-content: center;
+  font-weight: 600;
+  font-size: 2rem;
+}

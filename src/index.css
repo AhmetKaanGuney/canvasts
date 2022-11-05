@@ -1,13 +1,59 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  --primary: #29447a;
+  --primary-light: #4b73c3;
+  --secondary: #383a3e;
+  --success: #16c56e;
+  --danger: #ff4a4a;
+  --warning: #f2800d;
+  --info: #dab80b;
+  --link: #6699ff;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: black;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.9);
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#root-canvas {
+  background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.23));
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+#floor {
+  position: fixed;
+  width: 100%;
+  height: 40px;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.09);
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  align-content: center;
+}
+.checkbox {
+  width: 1.5rem;
+  height: 1.5rem;
+  cursor: pointer;
+}
+
+.checkbox-label {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  margin: 3px 0 0 6px;
+  align-items: center;
 }

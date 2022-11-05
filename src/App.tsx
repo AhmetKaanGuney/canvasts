@@ -1,25 +1,43 @@
-import type { Component } from 'solid-js';
+import { JSX, Component, createSignal, For, Show } from 'solid-js';
+import './app.css';
+import Controller from './components/controller/Controller';
+import BouncingBalls from './components/BouncingBalls';
 
-import logo from './logo.svg';
-import styles from './App.module.css';
+const apps = ['Bouncing Balls', 'Circling'];
 
 const App: Component = () => {
+  const [selection, setSelection] = createSignal('');
+  const [controls, setControls] = createSignal<JSX.Element>(null);
+
+  function onMenuSelect(selectedApp: string) {
+    console.log(selectedApp);
+    setSelection(selectedApp);
+  }
   return (
-    <div class={styles.App}>
-      <header class={styles.header}>
-        <img src={logo} class={styles.logo} alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          class={styles.link}
-          href="https://github.com/solidjs/solid"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Solid
-        </a>
-      </header>
+    <div id='app'>
+      <Controller>{controls()}</Controller>
+      <Show
+        when={selection() === 'Bouncing Balls'}
+        fallback={<Menu onSelect={onMenuSelect} />}
+      >
+        <BouncingBalls setControls={setControls} />
+      </Show>
+    </div>
+  );
+};
+
+type MenuProps = { onSelect: (item: string) => void };
+
+const Menu: Component<MenuProps> = (props) => {
+  return (
+    <div id='main-menu'>
+      <For each={apps}>
+        {(item) => (
+          <button class='menu-option' onclick={() => props.onSelect(item)}>
+            {item}
+          </button>
+        )}
+      </For>
     </div>
   );
 };
