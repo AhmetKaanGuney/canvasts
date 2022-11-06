@@ -1,14 +1,10 @@
 import { JSX, Setter, Component, onMount, createSignal } from 'solid-js';
 import { random } from '../lib/random';
 import Circle from '../lib/canvas/circle';
-import Slider from './slider/Slider';
-import Checkbox from './checkbox/Checkbox';
-import DisplayValue from './display-value/DisplayValue';
-
-let _id = 0;
-function getId() {
-  return _id++;
-}
+import Slider from '../components/slider/Slider';
+import Id from '../lib/id';
+import { Vector, Point } from '../lib/canvas/geometry';
+import { getRandomColor } from '../lib/style';
 
 const BouncingBalls: Component<{ setControls: Setter<JSX.Element> }> = (
   props
@@ -26,14 +22,16 @@ const BouncingBalls: Component<{ setControls: Setter<JSX.Element> }> = (
   }
 
   function init() {
-    balls = [];
-    canvas = document.getElementById('root-canvas') as HTMLCanvasElement;
+    canvas = document.getElementById(
+      'bouncing-balls-canvas'
+    ) as HTMLCanvasElement;
     c = canvas.getContext('2d')!;
     if (c === null) {
       console.error('Cannot get context!');
-
       return;
     }
+    Id.reset();
+    balls = [];
 
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight - canvasMarginBottom;
@@ -43,27 +41,29 @@ const BouncingBalls: Component<{ setControls: Setter<JSX.Element> }> = (
       const radius = random(30, 50);
       const x = random(radius + 1, canvas.width - radius);
       const y = random(radius + 1, canvas.height / 2);
-      const dx = random(-5, 5);
-      const dy = 0;
-      const circle = new Circle(getId(), { x, y }, radius, { dx, dy }, canvas);
-      circle.draw();
+      const position = new Point(x, y);
+      const velocity = new Vector(random(-5, 5), 0);
+      const style = {
+        fillStyle: getRandomColor(),
+      };
+      const ball = new Circle(position, radius, velocity, canvas, style);
 
-      balls.push(circle);
+      ball.draw();
+      balls.push(ball);
     }
   }
 
   function animate() {
-    requestAnimationFrame(animate);
-
     c.clearRect(0, 0, canvas.width, canvas.height);
 
     // Render Circles
     for (let i = 0; i < balls.length; i++) {
-      const circle = balls[i];
-      if (circle) {
-        circle.update();
+      const ball = balls[i];
+      if (ball) {
+        ball.update();
       }
     }
+    requestAnimationFrame(animate);
   }
 
   onMount(() => {
@@ -87,8 +87,8 @@ const BouncingBalls: Component<{ setControls: Setter<JSX.Element> }> = (
 
   return (
     <>
-      <canvas id='root-canvas'></canvas>
-      <div id='floor' />
+      <canvas id='bouncing-balls-canvas'></canvas>
+      <div id='bouncing-balls-floor' />
     </>
   );
 };

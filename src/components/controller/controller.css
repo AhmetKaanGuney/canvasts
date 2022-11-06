@@ -30,7 +30,6 @@
 
 .controller-item:hover {
   filter: brightness(1.1);
-  cursor: pointer;
 }
 
 #controller-main-menu {
@@ -38,4 +37,5 @@
   justify-content: center;
   font-weight: 600;
   font-size: 2rem;
+  cursor: pointer;
 }

@@ -1,9 +1,10 @@
 import { JSX, Component, createSignal, For, Show } from 'solid-js';
 import './app.css';
 import Controller from './components/controller/Controller';
-import BouncingBalls from './components/BouncingBalls';
+import BouncingBalls from './scenes/BouncingBalls';
+import TheCircling from './scenes/TheCircling';
 
-const apps = ['Bouncing Balls', 'Circling'];
+const scenes = ['Bouncing Balls', 'The Circling'];
 
 const App: Component = () => {
   const [selection, setSelection] = createSignal('');
@@ -15,12 +16,18 @@ const App: Component = () => {
   }
   return (
     <div id='app'>
-      <Controller>{controls()}</Controller>
-      <Show
-        when={selection() === 'Bouncing Balls'}
-        fallback={<Menu onSelect={onMenuSelect} />}
-      >
+      <Controller onMainMenuClick={() => setSelection('')}>
+        {controls()}
+      </Controller>
+
+      <Show when={selection() === ''}>
+        <Menu onSelect={onMenuSelect} />
+      </Show>
+      <Show when={selection() === 'Bouncing Balls'}>
         <BouncingBalls setControls={setControls} />
+      </Show>
+      <Show when={selection() === 'The Circling'}>
+        <TheCircling setControls={setControls} />
       </Show>
     </div>
   );
@@ -31,7 +38,7 @@ type MenuProps = { onSelect: (item: string) => void };
 const Menu: Component<MenuProps> = (props) => {
   return (
     <div id='main-menu'>
-      <For each={apps}>
+      <For each={scenes}>
         {(item) => (
           <button class='menu-option' onclick={() => props.onSelect(item)}>
             {item}
