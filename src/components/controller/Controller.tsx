@@ -13,7 +13,7 @@ const Controller: Component<Props> = (props) => {
         id='controller-main-menu'
         onclick={props.onMainMenuClick}
       >
-        Main Menu
+        Menu
       </div>
       {props.children}
     </div>

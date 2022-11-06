@@ -1,10 +1,10 @@
 :root {
-  --primary: #29447a;
+  --primary: #263452;
   --primary-light: #4b73c3;
   --secondary: #383a3e;
   --success: #16c56e;
   --danger: #ff4a4a;
-  --warning: #f2800d;
+  --warning: #ef8924;
   --info: #dab80b;
   --link: #6699ff;
 }
@@ -40,4 +40,14 @@ body {
   display: flex;
   margin: 3px 0 0 6px;
   align-items: center;
+}
+
+.fadeout {
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.fadein {
+  opacity: 1;
+  transition: opacity 0.4s;
 }

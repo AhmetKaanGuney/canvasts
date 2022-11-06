@@ -142,7 +142,6 @@ function TheCircling(props: TheCirclingProps) {
   let increment = 0;
 
   function animate() {
-    // TODO: add particle trail
     c.fillStyle = `rgba(0,0,0, ${1 - trailLength() / 100})`;
     c.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -191,11 +190,7 @@ function TheCircling(props: TheCirclingProps) {
     </>
   );
 
-  return (
-    <>
-      <canvas id='the-circling-canvas'></canvas>
-    </>
-  );
+  return <canvas id='the-circling-canvas'></canvas>;
 }
 
 export default TheCircling;
