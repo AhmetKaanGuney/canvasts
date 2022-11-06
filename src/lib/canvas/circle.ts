@@ -23,6 +23,7 @@ export default class Circle {
     strokeStyle: theme.gray[80],
     lineWidth: 1,
   };
+  gravityDisabled = false;
 
   constructor(
     position: Point,
@@ -79,13 +80,17 @@ export default class Circle {
     if (collidesBottom) {
       this.velocity.y = -this.velocity.y * VERTICAL_FRICTION;
       this.velocity.x = this.velocity.x * HORIZONTAL_FRICTION;
-    } else {
+    } else if (!this.gravityDisabled) {
       this.velocity.y += GRAVITY;
     }
 
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
     this.draw();
+  }
+
+  disableGravity() {
+    this.gravityDisabled = true;
   }
 
   toJSON() {
